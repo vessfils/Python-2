@@ -1,0 +1,62 @@
+📥 1. Chargement de CSV
+python
+Copier
+Modifier
+import pandas as pd
+
+df = pd.read_csv("fichier.csv")             # Lecture simple
+df = pd.read_csv("fichier.csv", index_col=0) # Utilise la 1ère colonne comme index
+🔎 2. Exploration rapide
+python
+Copier
+Modifier
+df.head()         # Affiche les 5 premières lignes
+df.tail()         # Les 5 dernières lignes
+df.shape          # (nb_lignes, nb_colonnes)
+df.columns        # Liste des noms de colonnes
+df.index          # Liste des index (ex: noms de pays)
+df.info()         # Infos générales (types, non-null, etc.)
+df.describe()     # Statistiques de base (moyenne, std, etc.)
+📊 3. Accès aux données
+python
+Copier
+Modifier
+df["colonne"]             # Accès à une colonne
+df[["col1", "col2"]]      # Accès à plusieurs colonnes
+df.loc["Nom"]             # Accès par index (ligne) – ex: "France"
+df.iloc[0]                # Accès par numéro de ligne
+df.loc["France", "2000"]  # Cellule précise (ligne, colonne)
+🔁 4. Filtrage / Masques
+python
+Copier
+Modifier
+df[df["2000"] > 70]          # Lignes où la valeur en 2000 > 70
+df[(df["2000"] > 70) & (df["2010"] > 75)]  # Conditions combinées
+➕➖ 5. Opérations sur colonnes
+python
+Copier
+Modifier
+df["2000"].mean()        # Moyenne de la colonne 2000
+df["2000"].max()         # Max
+df["2000"].idxmax()      # Pays avec la valeur max
+df["diff"] = df["2100"] - df["1800"]  # Nouvelle colonne : écart
+🧼 6. Nettoyage
+python
+Copier
+Modifier
+df.dropna()              # Supprime les lignes avec NaN
+df.fillna(0)             # Remplace les NaN par 0
+df.rename(columns={"old": "new"})  # Renommer des colonnes
+📈 7. Graphiques de base
+python
+Copier
+Modifier
+df.loc["France"].plot()         # Ligne d’évolution d’un pays
+df.T["France"].plot()           # (si colonnes = années, il faut transposer)
+df["2000"].hist()               # Histogramme des valeurs pour 2000
+df["2000"].plot(kind="box")     # Boîte à moustaches
+💾 8. Sauvegarde CSV
+python
+Copier
+Modifier
+df.to_csv("nouveau_fichier.csv")
